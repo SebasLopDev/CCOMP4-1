@@ -3,22 +3,23 @@
 using namespace std;
 using namespace std::chrono; 
 
-void swap(int &a,int &b){
-    int aux=a;
-    a=b;
-    b=aux;
-}
+bool asc(int a,int b){
+     return a>b;
+};
+bool desc(int a,int b){
+    return a<b;
+};
 
-void bubleSortD(int *arr,int tam){
+void bubble(int *arr,int tam,bool(*comp)(int, int)){
     for(int i=0;i<tam-1;i++){
-        for(int j=0;j<tam-1;j++){
-            if(arr[j]>arr[j+1]){
+        for(int j=0;j<tam-1-i;j++){
+            if(comp(arr[j],arr[j+1])){
                 swap(arr[j],arr[j+1]);
             }
         }
     }
-
 }
+
 void mostrar(int *arr,int tam){
     for(int i=0;i<tam;i++){
         cout<<arr[i]<<" ";
@@ -27,10 +28,9 @@ void mostrar(int *arr,int tam){
 }
 
 
-
 int main(){
 
-    int arr[]={45, 12, 89, 32, 67, 24, 78, 91, 10, 53,
+    /*int arr[]={45, 12, 89, 32, 67, 24, 78, 91, 10, 53,
     6, 83, 37, 95, 28, 41, 55, 99, 14, 72,
     63, 30, 21, 81, 1, 47, 19, 74, 52, 96,
     88, 33, 16, 79, 92, 58, 25, 62, 36, 86,
@@ -41,10 +41,18 @@ int main(){
     59, 93, 35, 64, 87, 20, 4, 57, 75, 27,
     17, 65, 60, 39, 84, 44, 18, 51, 73, 31};
     
-    int tam=sizeof(arr)/sizeof(arr[0]);
+    int tam=sizeof(arr)/sizeof(arr[0]);*/
+
+    const int tam = 10000;
+    int arr[tam];
+
+    srand(time(0)); // Inicializar semilla aleatoria
+    for (int i = 0; i < tam; i++) {
+        arr[i] = rand() % 20000; // Números aleatorios entre 0 y 9999
+    }
 
     auto inicio = high_resolution_clock::now();  // Inicio del tiempo
-    bubleSortD(arr,tam);
+    bubble(arr,tam,desc);
     auto fin = high_resolution_clock::now();  // Fin del tiempo
 
     mostrar(arr,tam);
