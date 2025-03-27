@@ -1,31 +1,57 @@
 #include<iostream>
 #include <chrono>
 using namespace std;
-using namespace std::chrono; 
+using namespace std::chrono;
 
-bool asc(int a,int b){
-     return a>b;
-};
-bool desc(int a,int b){
-    return a<b;
+void swap(int &a,int &b){
+    int aux=a;
+    a=b;
+    b=aux;
+}
+
+template<class T>
+class ASC {
+public:
+    bool operator()(T a,T b) {
+        return a > b;
+    }
 };
 
-void bubble(int *arr,int tam,bool(*comp)(int, int)){
-    for(int i=0;i<tam-1;i++){
-        for(int j=0;j<tam-1-i;j++){
-            if(comp(arr[j],arr[j+1])){
-                swap(arr[j],arr[j+1]);
+template<class T>
+class DESC {
+public:
+    bool operator()(T a,T b) {
+        return a < b;
+    }
+};
+
+template<class T,class O>
+class BubbleSort{
+
+    public:        
+        O obj;
+        void operator()(T *arr,T tam){
+            for(int i=0;i<tam-1;i++){
+                for(int j=0;j<tam-1-i;j++){
+                    if(obj(arr[j],arr[j+1])){
+                        swap(arr[j],arr[j+1]);
+                    }
+                }
             }
+
         }
-    }
-}
 
-void mostrar(int *arr,int tam){
-    for(int i=0;i<tam;i++){
-        cout<<arr[i]<<" ";
-    }
+        void mostrar(T *arr,T tam){
+            for(int i=0;i<tam;i++){
+                cout<<arr[i]<<"-";
+            }
 
-}
+        }   
+
+         
+
+
+};
 
 
 int main(){
@@ -51,16 +77,15 @@ int main(){
         arr[i] = rand() % 20000; // Números aleatorios entre 0 y 9999
     }
 
+    BubbleSort<int,DESC<int>> A;
+
     auto inicio = high_resolution_clock::now();  // Inicio del tiempo
-    bubble(arr,tam,asc);
+    A(arr,tam);
     auto fin = high_resolution_clock::now();  // Fin del tiempo
 
-    mostrar(arr,tam);
-
+    A.mostrar(arr,tam);
     auto duracion = duration_cast<milliseconds>(fin - inicio);
     cout << "Tiempo de ejecucion: " << duracion.count() << " ms" << endl;
-
-
 
 
     return 0;

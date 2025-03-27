@@ -3,43 +3,48 @@
 using namespace std;
 using namespace std::chrono; 
 
-class Orden{
-   
-    public:
-        virtual void bubleSort(int *,int) =0;
-        virtual void mostrar(int *,int)=0;
-        virtual bool asc(int a,int b){
-            return a>b;
-        };
-        virtual bool desc(int a,int b){
-            return a<b;
-        };
-        virtual ~Orden() {}
+void swap(int &a,int &b){
+    int aux=a;
+    a=b;
+    b=aux;
+}
+
+bool asc(int a,int b){
+     return a>b;
+};
+bool desc(int a,int b){
+    return a<b;
 };
 
-class Bubble:public Orden{
-
-    public:
-        void bubleSort(int *arr,int tam)override{
-            for(int i=0;i<tam-1;i++){
-                for(int j=0;j<tam-1;j++){
-                    if(arr[j]>arr[j+1]){
-                        swap(arr[j],arr[j+1]);
-                    }
-                }
+void bubbleSortD_Asc(int *arr,int tam){
+    for(int i=0;i<tam-1;i++){
+        for(int j=0;j<tam-1-i;j++){
+            if(asc(arr[j],arr[j+1])){
+                swap(arr[j],arr[j+1]);
             }
-
         }
+    }
 
-        void mostrar(int *arr,int tam){
-            for(int i=0;i<tam;i++){
-                cout<<arr[i]<<" ";
+}
+
+void bubbleSortD_Desc(int *arr,int tam){
+   for(int i=0;i<tam-1;i++){
+        for(int j=0;j<tam-1-i;j++){
+            if(desc(arr[j],arr[j+1])){
+                swap(arr[j],arr[j+1]);
             }
+        }
+    }
 
-        }   
+}
+void mostrar(int *arr,int tam){
+    for(int i=0;i<tam;i++){
+        cout<<arr[i]<<" ";
+    }
+
+}
 
 
-};
 
 int main(){
 
@@ -56,6 +61,7 @@ int main(){
     
     int tam=sizeof(arr)/sizeof(arr[0]);*/
 
+
     const int tam = 10000;
     int arr[tam];
 
@@ -64,20 +70,17 @@ int main(){
         arr[i] = rand() % 20000; // Números aleatorios entre 0 y 9999
     }
 
-    Orden* p = new Bubble();  
     auto inicio = high_resolution_clock::now();  // Inicio del tiempo
-    p->bubleSort(arr,tam);  
+    bubbleSortD_Desc(arr,tam);
     auto fin = high_resolution_clock::now();  // Fin del tiempo
 
-    p->mostrar(arr,tam);
+    mostrar(arr,tam);
+
     auto duracion = duration_cast<milliseconds>(fin - inicio);
     cout << "Tiempo de ejecucion: " << duracion.count() << " ms" << endl;
 
-    delete p;
+
+
 
     return 0;
-
-
-
-    
 }
