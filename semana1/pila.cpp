@@ -33,8 +33,8 @@ class Pila{
             if(cont==0){
                 cout<<"EL ARREGLO ESTA VACÍO"<<endl;
             }else{
-                cont--;
                 top--;
+                cont--;
             }
 
         }
@@ -60,7 +60,11 @@ int main(){
 
     int arr[10];
     Pila pila(arr,10);
+    pila.push(3);
+    pila.push(5);
     pila.pop();
+    pila.mostrar();
+    
 
 
     return 0;
