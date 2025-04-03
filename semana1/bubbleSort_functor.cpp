@@ -12,7 +12,7 @@ void swap(int &a,int &b){
 template<class T>
 class ASC {
 public:
-    bool operator()(T a,T b) {
+    bool operator()(T &a,T &b) {
         return a > b;
     }
 };
@@ -20,7 +20,7 @@ public:
 template<class T>
 class DESC {
 public:
-    bool operator()(T a,T b) {
+    bool operator()(T &a,T &b) {
         return a < b;
     }
 };
@@ -69,7 +69,7 @@ int main(){
     
     int tam=sizeof(arr)/sizeof(arr[0]);*/
 
-    const int tam = 10000;
+    const int tam = 1000;
     int arr[tam];
 
     srand(time(0)); // Inicializar semilla aleatoria

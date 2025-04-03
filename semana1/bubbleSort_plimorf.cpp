@@ -7,10 +7,10 @@ class Orden{
    
     public:
         virtual void ordenar(int *,int)=0;
-        virtual bool asc(int a,int b){
+        bool asc(int a,int b){
             return a>b;
         };
-        virtual bool desc(int a,int b){
+        bool desc(int a,int b){
             return a<b;
         };
         void swap(int &a,int &b){

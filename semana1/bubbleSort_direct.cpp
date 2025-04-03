@@ -19,7 +19,7 @@ bool desc(int a,int b){
 void bubbleSortD_Asc(int *arr,int tam){
     for(int i=0;i<tam-1;i++){
         for(int j=0;j<tam-1-i;j++){
-            if(asc(arr[j],arr[j+1])){
+            if(arr[j]>arr[j+1]){
                 swap(arr[j],arr[j+1]);
             }
         }
@@ -30,7 +30,7 @@ void bubbleSortD_Asc(int *arr,int tam){
 void bubbleSortD_Desc(int *arr,int tam){
    for(int i=0;i<tam-1;i++){
         for(int j=0;j<tam-1-i;j++){
-            if(desc(arr[j],arr[j+1])){
+            if(arr[j]<arr[j+1]){
                 swap(arr[j],arr[j+1]);
             }
         }
@@ -43,6 +43,8 @@ void mostrar(int *arr,int tam){
     }
 
 }
+
+
 
 
 
@@ -62,7 +64,7 @@ int main(){
     int tam=sizeof(arr)/sizeof(arr[0]);*/
 
 
-    const int tam = 10000;
+    const int tam = 100000;
     int arr[tam];
 
     srand(time(0)); // Inicializar semilla aleatoria
