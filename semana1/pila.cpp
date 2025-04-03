@@ -2,36 +2,53 @@
 using namespace std;
 
 
-template<class T>
-struct nodo{
-    T valor;
-    nodo<T>*next;
 
-    nodo(int v, nodo<T>*n=0){
-        valor=v;
-        next=n;
-    }
-
-};
-
-template<class P>
 class Pila{
-    nodo<T>*top=0;
+    int *top=NULL;    
+    int tamaño;
+    int *arreglo;
+    int cont=0;
+    
+
     public:
-        void push(T valor){
-            top=new nodo<T>(valor,top);
+
+        Pila(int *inicio,int tam){
+            arreglo=inicio;
+            tamaño=tam;
+            top=arreglo;            
+        }
+        void push(int valor){
+            if(cont<tamaño ){
+                *top=valor;
+                top++;
+                cont++;
+            }
+            else{
+                cout<<"ESTA LLENO"<<endl;
+            }
 
         }
 
-        bool pop(T &v){
-            nodo<T>*tmp=top;
-            if(tmp){
-                top=top->next;
-                v=tmp->valor;
-                delete tmp;
-                return true;
+        void pop(){
+            if(cont==0){
+                cout<<"EL ARREGLO ESTA VACÍO"<<endl;
+            }else{
+                cont--;
+                top--;
             }
-            return false;
+
+        }
+
+        void mostrar(){
+            if(cont==0){
+                cout<<"ESTA VACIO"<<endl;
+            }else{
+                for(int *p=arreglo;p<arreglo+cont;p++){
+                    cout<<*p<<" ";
+                }
+                cout<<endl;
+
+            }
 
         }
 
@@ -41,7 +58,9 @@ class Pila{
 
 int main(){
 
-
+    int arr[10];
+    Pila pila(arr,10);
+    pila.pop();
 
 
     return 0;
