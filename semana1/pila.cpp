@@ -5,7 +5,7 @@ using namespace std;
 
 class Pila{
     int *top=NULL;    
-    int tamaño;
+    int tamanio;
     int *arreglo;
     int cont=0;
     
@@ -14,11 +14,11 @@ class Pila{
 
         Pila(int *inicio,int tam){
             arreglo=inicio;
-            tamaño=tam;
+            tamanio=tam;
             top=arreglo;            
         }
         void push(int valor){
-            if(cont<tamaño ){
+            if(cont<tamanio ){
                 *top=valor;
                 top++;
                 cont++;
@@ -29,12 +29,13 @@ class Pila{
 
         }
 
-        void pop(){
+        void pop(int &v){
             if(cont==0){
                 cout<<"EL ARREGLO ESTA VACÍO"<<endl;
             }else{
                 top--;
                 cont--;
+                v=*top;
             }
 
         }
@@ -59,11 +60,27 @@ class Pila{
 int main(){
 
     int arr[10];
+    int a=0;
     Pila pila(arr,10);
+    pila.push(1);
+    pila.push(2);
     pila.push(3);
+    pila.push(4);
     pila.push(5);
-    pila.pop();
+    pila.push(6);
+    pila.push(7);
+    pila.push(8);
+    pila.push(9);
+    pila.push(10);
+    pila.push(11);
     pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    
     
 
 
