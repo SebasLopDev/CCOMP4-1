@@ -4,10 +4,10 @@ using namespace std;
 struct nodo{
     int arr[5];
     nodo *next;     
-    int tam;
+    int tamanio=sizeof(arr)/sizeof(arr[0]);;
     nodo(nodo *n=nullptr){        
         next=n;        
-        tam=5;//sizeof(arr)/sizeof(arr[0]);
+        //tam=5;//sizeof(arr)/sizeof(arr[0]);
         
     }
 
@@ -19,38 +19,56 @@ class Cola{
         nodo *front;
         int *head;
         int *tail;        
-        int cont=0;
-        int recont=0;
+        //int cont=0;
+        //int recont=0;
         int tam;
         Cola(){
             list=new nodo;
             front=list;            
             head=list->arr;            
             tail=list->arr;
-            tam=list->tam;
+            tam=list->tamanio;
         }
 
         void push(int valor){
-            if(cont%5==0 && cont!=0){
+            if(tail<list->arr+tam){
+                *tail=valor;
+                tail++;
+            }
+           //*tail=valor;
+           //tail++;
+            if(tail==list->arr+tam){
                 list->next=new nodo;
                 list=list->next;
                 tail=list->arr;
+                return;
             }
-            *tail=valor;
-            tail++;
-            cont++;
+            /*if(cont%5==0 && cont!=0){
+                list->next=new nodo;
+                list=list->next;
+                tail=list->arr;
+            }*/
+            //cont++;
         }
 
         void pop(int &v){
-            if (cont == 0) {
-                cout << "Cola vacía"<<endl;
+            if (head == tail) {
+                cout << "pop Cola vacía"<<endl;
                 return;
             }
             v=*head;
             head++;
-            cont--;
-            recont++;
-            if(recont%tam==0){
+            if(head==list->arr+tam){                
+                nodo *delnodo=front;
+                front=front->next;
+                delete delnodo;
+                if (front != nullptr)
+                    head = front->arr;
+                return;
+            }
+            //cont--;
+            //recont++;
+            /*if(recont%tam==0){
                 nodo *delnodo=front;
                 front=front->next;
                 if (front!= nullptr){
@@ -58,30 +76,28 @@ class Cola{
                 }                
                 recont=0;
                 delete delnodo;
-            }
+            }*/
             
             
         }
 
         void mostrar(){
-            int *f=head; 
-            nodo *fr=front;
-            int total=0;
-            while(total<cont){
-                while(f < fr->arr + tam && total<cont){
-                    cout<<*f<<" ";
+            nodo *fr = front;
+            int *f = head;
+
+            while (fr != nullptr) {
+                while (f < fr->arr + tam) {
+                    if (fr == list && f == tail) // si llegamos a tail, paramos
+                        break;
+                    cout << *f << " ";
                     f++;
-                    total++;
                 }
-                fr=fr->next;
-                if (fr != nullptr) {
+                fr = fr->next;
+                if (fr != nullptr)
                     f = fr->arr;
-                }
-                cout<<"  ";
+            }
 
-            }           
-
-            cout<<endl;
+            cout << "NULL" << endl;
 
         }
 
@@ -111,6 +127,18 @@ int main(){
     cola.mostrar();
     cola.pop(a);
     cout<<"Elemento eliminado "<<a<<endl;
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
     cola.pop(a);
     cout<<"Elemento eliminado "<<a<<endl;
     cola.mostrar();

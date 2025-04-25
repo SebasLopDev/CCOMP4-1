@@ -14,7 +14,7 @@ class Cola{
     
     public:
         Cola(int tam){
-            tamanio=tam;
+            tamanio=tam+1;
             arreglo=new T[tamanio];
             head=arreglo;
             tail=arreglo;
@@ -24,8 +24,9 @@ class Cola{
         void push(T valor){
             
            
-            if( (tail+1== head) || (tail== arreglo + tamanio && head == arreglo)){
-                //*tail=valor;
+            if( (tail+1== head) || (tail+1== arreglo + tamanio && head == arreglo)){
+
+                                
                 cout<<"EL ARREGLO ESTA LLENO"<<endl;                     
                 return;
             }
@@ -65,18 +66,17 @@ class Cola{
         void mostrar(){
             T *h=head;
             T *t=tail;
-            if(h==t){
+            if(head==tail){
                 cout<<"ESTA VACIO"<<endl;
                 return;
             }
-            while(h==tail){
-                cout<<*h<<" ";
-                h++;
+            while(h!=t){
                 if(h==arreglo+tamanio){
-                    
                     h=arreglo;
                     
                 }
+                cout<<*h<<" ";
+                h++;
                 
             }
             cout<<endl;
@@ -92,8 +92,8 @@ class Cola{
 int main(){
 
     
-    int a=0;
     Cola<int> cola(10);
+    int a=0;
     cola.push(1);
     cola.push(2);
     cola.push(3);
@@ -106,7 +106,7 @@ int main(){
     cola.push(10);
     cola.push(11);
     cola.mostrar();
-    /*cola.pop(a);
+    cola.pop(a);
     cout<<"elemento eliminado es "<<a<<endl;
     cola.mostrar();
     cola.pop(a);
@@ -153,7 +153,7 @@ int main(){
     cola.pop(a);
     cout<<"elemento eliminado es "<<a<<endl;
     cola.mostrar();
-    cola.pop(a);*/
+    cola.pop(a);
 
     
 

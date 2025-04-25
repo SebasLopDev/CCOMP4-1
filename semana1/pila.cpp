@@ -2,49 +2,51 @@
 using namespace std;
 
 
-
+template<class T>
 class Pila{
-    int *top=NULL;    
+    T *top=nullptr;    
     int tamanio;
-    int *arreglo;
-    int cont=0;
+    T *arreglo;
+    //int cont=0;
     
 
     public:
 
-        Pila(int *inicio,int tam){
-            arreglo=inicio;
+        Pila(int tam){ //T *inicio,
+            //arreglo=inicio;
             tamanio=tam;
+            arreglo=new T[tamanio];
             top=arreglo;            
         }
-        void push(int valor){
-            if(cont<tamanio ){
+        void push(T valor){
+            if(top<arreglo+tamanio ){
                 *top=valor;
                 top++;
-                cont++;
+                //cont++;
             }
             else{
-                cout<<"ESTA LLENO"<<endl;
+                cout<<"EL ARREGLO ESTA LLENO"<<endl;
             }
 
         }
 
-        void pop(int &v){
-            if(cont==0){
-                cout<<"EL ARREGLO ESTA VACÍO"<<endl;
+        void pop(T &v){
+            if(top==arreglo){
+                cout<<"EL ARREGLO ESTA VACIO"<<endl;
             }else{
                 top--;
-                cont--;
+                //cont--;
                 v=*top;
             }
 
         }
 
-        void mostrar(){
-            if(cont==0){
-                cout<<"ESTA VACIO"<<endl;
+        void mostrar(){  
+            int *ptr=top;          
+            if(top==arreglo){
+                cout<<"ARREGLO VACIO"<<endl;
             }else{
-                for(int *p=arreglo;p<arreglo+cont;p++){
+                for(int *p=arreglo;p<ptr;p++){
                     cout<<*p<<" ";
                 }
                 cout<<endl;
@@ -59,9 +61,9 @@ class Pila{
 
 int main(){
 
-    int arr[10];
+    
+    Pila<int> pila(10);
     int a=0;
-    Pila pila(arr,10);
     pila.push(1);
     pila.push(2);
     pila.push(3);
@@ -73,6 +75,7 @@ int main(){
     pila.push(9);
     pila.push(10);
     pila.push(11);
+    pila.push(12);
     pila.mostrar();
     pila.pop(a);
     cout<<"valor eliminado es "<<a<<endl;
@@ -80,6 +83,31 @@ int main(){
     pila.pop(a);
     cout<<"valor eliminado es "<<a<<endl;
     pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();    
+    pila.pop(a);
+    cout<<"valor eliminado es "<<a<<endl;
+    pila.mostrar();
+
     
     
 
