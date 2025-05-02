@@ -18,6 +18,9 @@ class Pila{
             arreglo=new T[tamanio];
             top=arreglo;            
         }
+        ~Pila() {
+            delete[] arreglo;
+        }
         void push(T valor){
             if(top<arreglo+tamanio ){
                 *top=valor;
@@ -30,14 +33,17 @@ class Pila{
 
         }
 
-        void pop(T &v){
+        bool pop(T &v){
             if(top==arreglo){
                 cout<<"EL ARREGLO ESTA VACIO"<<endl;
+                return false;
             }else{
                 top--;
                 //cont--;
-                v=*top;
+                v=*top;               
+
             }
+            return true;
 
         }
 

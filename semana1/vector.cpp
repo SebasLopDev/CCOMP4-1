@@ -20,7 +20,9 @@ class Cola{
             tail=arreglo;
             //cont=arreglo;
         }
-
+        ~Cola() {
+            delete[] arreglo;
+        }
         void push(T valor){
             
            
@@ -43,11 +45,11 @@ class Cola{
 
         }
 
-        void pop(T &v){
+        bool pop(T &v){
              
             if(head==tail){
                 cout<<"EL ARREGLO ESTA VACIO"<<endl;
-                return;
+                return false;
             }
             
             v=*head;
@@ -56,6 +58,7 @@ class Cola{
             if(head==arreglo+tamanio){
                 head=arreglo;
             }
+            return true;
             
 
            
@@ -92,7 +95,7 @@ class Cola{
 int main(){
 
     
-    Cola<int> cola(10);
+    Cola<int> cola(20);
     int a=0;
     cola.push(1);
     cola.push(2);
@@ -160,3 +163,93 @@ int main(){
 
     return 0;
 }
+
+/*
+
+#include <iostream>
+using namespace std;
+
+template <class T>
+struct nodo {
+    T arr[5];
+    nodo* next;
+    int tamanio;
+
+    nodo(nodo* n = nullptr) {
+        next = n;
+        tamanio = sizeof(arr) / sizeof(arr[0]);
+    }
+};
+
+template <class T>
+class Cola {
+public:
+    nodo<T>* list;
+    nodo<T>* front;
+    T* head;
+    T* tail;
+    int tam;
+
+    Cola() {
+        list = new nodo<T>;
+        front = list;
+        head = list->arr;
+        tail = list->arr;
+        tam = list->tamanio;
+    }
+
+    void push(T valor) {
+        if (tail == list->arr + tam) {
+            list->next = new nodo<T>;
+            list = list->next;
+            tail = list->arr;
+        }
+        *tail = valor;
+        tail++;
+    }
+
+    bool pop(T& v) {
+        if (front == list && head == tail) {
+            cout << "pop Cola vacia" << endl;
+            return false;
+        }
+        v = *head;
+        head++;
+        if (head == front->arr + tam) {
+            nodo<T>* delnodo = front;
+            front = front->next;
+            delete delnodo;
+            if (front != nullptr)
+                head = front->arr;
+        }
+        return true;
+    }
+
+    void mostrar() {
+        nodo<T>* fr = front;
+        T* f = head;
+
+        if (f == tail) {
+            cout << "Cola vacía" << endl;
+            return;
+        }
+
+        while (fr) {
+            while (f < fr->arr + tam) {
+                if (fr == list && f == tail)
+                    break;
+                cout << *f << " ";
+                f++;
+            }
+            cout << " --- ";
+            fr = fr->next;
+            if (fr != nullptr)
+                f = fr->arr;
+        }
+        cout << "NULL" << endl;
+    }
+};
+
+
+
+*/

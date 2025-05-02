@@ -106,7 +106,7 @@ int main(){
     cola.push(10);
     cola.push(11);
     cola.mostrar();
-    /*cola.pop(a);
+    cola.pop(a);
     cout<<"elemento eliminado es "<<a<<endl;
     cola.mostrar();
     cola.pop(a);
@@ -153,7 +153,7 @@ int main(){
     cola.pop(a);
     cout<<"elemento eliminado es "<<a<<endl;
     cola.mostrar();
-    cola.pop(a);*/
+    cola.pop(a);
 
     
 

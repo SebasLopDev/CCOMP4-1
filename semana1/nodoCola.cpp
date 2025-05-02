@@ -31,18 +31,18 @@ class Cola{
         }
 
         void push(int valor){
-            if(tail<list->arr+tam){
+            /*if(tail<list->arr+tam){
                 *tail=valor;
                 tail++;
+            }*/
+           if(tail==list->arr+tam){
+               list->next=new nodo;
+               list=list->next;
+               tail=list->arr;
+               //return;
             }
-           //*tail=valor;
-           //tail++;
-            if(tail==list->arr+tam){
-                list->next=new nodo;
-                list=list->next;
-                tail=list->arr;
-                return;
-            }
+            *tail=valor;
+            tail++;
             /*if(cont%5==0 && cont!=0){
                 list->next=new nodo;
                 list=list->next;
@@ -51,21 +51,23 @@ class Cola{
             //cont++;
         }
 
-        void pop(int &v){
-            if (head == tail) {
-                cout << "pop Cola vacía"<<endl;
-                return;
+        bool pop(int &v){
+            if (front == list && head == tail) {
+                //v=*head;
+                cout << "pop Cola vacia"<<endl;
+                return false;
             }
             v=*head;
             head++;
-            if(head==list->arr+tam){                
+            if(head==front->arr+tam){                
                 nodo *delnodo=front;
                 front=front->next;
                 delete delnodo;
                 if (front != nullptr)
-                    head = front->arr;
-                return;
+                head = front->arr;
+                
             }
+            return true;
             //cont--;
             //recont++;
             /*if(recont%tam==0){
@@ -85,13 +87,19 @@ class Cola{
             nodo *fr = front;
             int *f = head;
 
-            while (fr != nullptr) {
+            if(f==tail){
+                cout<<" esta vacio"<<endl;
+                return;
+            }
+
+            while (fr) {
                 while (f < fr->arr + tam) {
                     if (fr == list && f == tail) // si llegamos a tail, paramos
                         break;
                     cout << *f << " ";
                     f++;
                 }
+                cout<<" --- ";
                 fr = fr->next;
                 if (fr != nullptr)
                     f = fr->arr;
@@ -142,6 +150,43 @@ int main(){
     cola.pop(a);
     cout<<"Elemento eliminado "<<a<<endl;
     cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+    cola.pop(a);
+    cout<<"Elemento eliminado "<<a<<endl;
+    cola.mostrar();
+
     
 
 
